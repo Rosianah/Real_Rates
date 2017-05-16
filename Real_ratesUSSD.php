@@ -36,25 +36,24 @@
 	        	$sql = "INSERT INTO `session_levels`(`session_id`,`phoneNumber`,`level`) VALUES('".$sessionId."','".$phoneNumber."',1)";
 	        	$db->query($sql);
 
-	        	//Serve our services menu
-				$response = " CON Choose a commodity to receive the rates for:\n";
-				$response = " CON Choose a commodity to receive the rates for:\n";
-	          	$response .= " 1. Bananas\n";
-				$response .= " 2. Carrots\n";	
-				$response .= " 3. Mangoes\n";
-				$response .= " 4. Onions\n";		
-				$response .= " 5. Potatoes\n";
-				$response .= " 6. Tomatoes\n";
-				$response .= " 7. Quit\n";
-	  			// Print the response onto the page so that the gateway can read it
-	  			header('Content-type: text/plain');
-		  			echo $response;	
+	        	$response = " CON Choose the category:\n";
+	          	$response .= " 1. Fruits\n";
+				$response .= " 2. Vegetables\n";	
+				$response .= " 3. Quit\n";	
 
-	        }
-	        break;
+	    case '0':
+	    	$sql = "INSERT INTO `session_levels`(`session_id`,`phoneNumber`,`level`) VALUES('".$sessionId."','".$phoneNumber."',1)";
+	        	$db->query($sql);
 
-	   case "0":
-	       # if($level==0)
+	        	$response = " CON Choose the category:\n";
+	          	$response .= " 1. Fruits\n";
+				$response .= " 2. Vegetables\n";	
+				$response .= " 3. Quit\n";	
+
+	    	break;
+//FRUITS
+	   case "1":
+	       if($level==1)
 	   {
 	        	//9b. Graduate user to next level & Serve Main Menu
 	        	$sql = "INSERT INTO `session_levels`(`session_id`,`phoneNumber`,`level`) VALUES('".$sessionId."','".$phoneNumber."',1)";
@@ -63,50 +62,41 @@
 	        	//Serve our services menu
 				$response = " CON Choose a commodity to receive the rates for:\n";
 	          	$response .= " 1. Bananas\n";
-				$response .= " 2. Carrots\n";	
-				$response .= " 3. Mangoes\n";
-				$response .= " 4. Onions\n";		
-				$response .= " 5. Potatoes\n";
-				$response .= " 6. Tomatoes\n";
-				$response .= " 7. Quit\n";
-	  			// Print the response onto the page so that the gateway can read it
-	  			header('Content-type: text/plain');
-		  			echo $response;	
+				$response .= " 2. Mangoes\n";	
+				$response .= " 3. Oranges\n";
+				$response .= " 4. Tomatoes\n";
+				$response .= " 5. Quit\n";
 
-	        }
-	        break;
-  
-	           
-	    case "1":
-	        if($level==1){
+				switch ($userResponse) {
+					case '1':
+						if($level==1){
 	        	//9d. Call the user and bridge to a sales person
-	          	$response = "END You will receive the rates for bananas shortly.\n";
+	          			$response = "END You will receive the rates for bananas shortly.\n";
 
 
-			$sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Banana";
+						$sql="SELECT CommodityName,Quantity, Mon_price FROM fruits_week1 where CommodityName = Bananas";
 
-			if ($result=mysqli_query($con,$sql))
- 			 {
- 			 while ($obj=mysqli_fetch_object($result))
-  			  {
-   			 printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
-    		}
-  			// Free result set
- 			 mysqli_free_result($result);
-			}
-	  			// Print the response onto the page so that our gateway can read it
-	  			header('Content-type: text/plain');
-		  			echo $response;	
+						if ($result=mysqli_query($con,$sql))
+ 						 {
+ 			 			while ($obj=mysqli_fetch_object($result))
+  						  {
+   						printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    					}
+  						// Free result set
+ 			 			mysqli_free_result($result);
+						}
+	  						// Print the response onto the page so that our gateway can read it
+	  						header('Content-type: text/plain');
+		  						echo $response;	
 
-	        }
-	        break;
+						break;
 
-	    case "2":
-	        if($level==1){
+			case "2":
+	       		if($level==1){
 	        	//9d. Call the user and bridge to a sales person
-	          	$response = "END You will receive the rates for Carrots shortly.\n";
+	          	$response = "END You will receive the rates for Mangoes shortly.\n";
 
-	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Carrot";
+	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM fruits_week1 where CommodityName = Carrots";
 
 				if ($result=mysqli_query($con,$sql))
  			 	{
@@ -123,100 +113,173 @@
 
 	        }
 	        break;
-	  		
 
-	    case "3":
-	        if($level==1){
+	        case "3":
+	       		if($level==1){
 	        	//9d. Call the user and bridge to a sales person
-	          	$response = "END You will receive the rates for Maize shortly.\n";
-	  			// Print the response onto the page so that our gateway can read it
-	  			$sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Maize";
+	          	$response = "END You will receive the rates for Oranges shortly.\n";
 
-			if ($result=mysqli_query($con,$sql))
- 			 {
- 			 while ($obj=mysqli_fetch_object($result))
-  			  {
-   			 printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
-    		}
-  			// Free result set
- 			 mysqli_free_result($result);
-			}
+	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM fruits_week1 where CommodityName = Carrot";
+
+				if ($result=mysqli_query($con,$sql))
+ 			 	{
+ 			 	while ($obj=mysqli_fetch_object($result))
+  			 	 {
+   			 	printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    			}
+  				// Free result set
+ 				 mysqli_free_result($result);
+				}
 	  			// Print the response onto the page so that our gateway can read it
 	  			header('Content-type: text/plain');
 		  			echo $response;	
 
 	        }
-	        
 	        break;
 
-	    case "4":
-	        if($level==1){
-	        	//9d. Call the user and bridge to a sales person
-	          	$response = "END You will receive the rates for Onions shortly.\n";
-	  			// Print the response onto the page so that our gateway can read it
-
-	  			$sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Onion";
-
-			if ($result=mysqli_query($con,$sql))
- 			 {
- 			 while ($obj=mysqli_fetch_object($result))
-  			  {
-   			 printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
-    		}
-  			// Free result set
- 			 mysqli_free_result($result);
-			}
-	  			// Print the response onto the page so that our gateway can read it
-	  			header('Content-type: text/plain');
-		  			echo $response;	
-	        }
-	        break;
-	    case "5":
-	        if($level==1){
-	        	//9d. Call the user and bridge to a sales person
-	          	$response = "END You will receive the rates for Potatoes shortly.\n";
-	  			// Print the response onto the page so that our gateway can read it
-	  			$sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Potato";
-
-			if ($result=mysqli_query($con,$sql))
- 			 {
- 			 while ($obj=mysqli_fetch_object($result))
-  			  {
-   			 printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
-    		}
-  			// Free result set
- 			 mysqli_free_result($result);
-			}
-
-	  			header('Content-type: text/plain');
-		  			echo $response;	 
-	        }
-	        break;
-	          				
-	    case "6":
-	        if($level==1){
+	        case "4":
+	       		if($level==1){
 	        	//9d. Call the user and bridge to a sales person
 	          	$response = "END You will receive the rates for Tomatoes shortly.\n";
 
-	        $sql="SELECT CommodityName,Quantity, Mon_price FROM rates_week1 where CommodityName = Onion";
+	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM fruits_week1 where CommodityName = Carrot";
 
-			if ($result=mysqli_query($con,$sql))
- 			 {
- 			 while ($obj=mysqli_fetch_object($result))
-  			  {
-   			 printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
-    		}
-  			// Free result set
- 			 mysqli_free_result($result);
-			}
+				if ($result=mysqli_query($con,$sql))
+ 			 	{
+ 			 	while ($obj=mysqli_fetch_object($result))
+  			 	 {
+   			 	printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    			}
+  				// Free result set
+ 				 mysqli_free_result($result);
+				}
+	  			// Print the response onto the page so that our gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	
 
+	        }
+	        break;
+	  	case '5':
+	  		if($level==1){
+	        	//9d. Call the user and bridge to a sales person
+	          	$response = "END Ensure to visit again to check the rates.\n";
 	  			// Print the response onto the page so that our gateway can read it
 	  			header('Content-type: text/plain');
 		  			echo $response;	 
 	        }
+	  		break;
+					
+		default:
+			$response = "CON Invalid choice. Press 0 to go back and try again\n";
+	  			// Print the response onto the page so that the gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	
+		}
 	        break;
 
-	    case "7":
+//END OF FRUITS
+
+//VEGETABLES
+	   case '2':
+	   	$sql = "INSERT INTO `session_levels`(`session_id`,`phoneNumber`,`level`) VALUES('".$sessionId."','".$phoneNumber."',1)";
+	        	$db->query($sql);
+
+	        	//Serve our services menu
+				$response = " CON Choose a commodity to receive the rates for:\n";
+	          	$response .= " 1. Potatoes\n";
+				$response .= " 2. Carrots\n";	
+				$response .= " 3. Onions\n";
+				$response .= " 4. Quit\n";
+
+		switch ($userResponse) {
+					case '1':
+						if($level==1){
+	        	//9d. Call the user and bridge to a sales person
+	          			$response = "END You will receive the rates for potatoes shortly.\n";
+
+
+						$sql="SELECT CommodityName,Quantity, Mon_price FROM vegetables_week1 where CommodityName = Potatoes";
+
+						if ($result=mysqli_query($con,$sql))
+ 						 {
+ 			 			while ($obj=mysqli_fetch_object($result))
+  						  {
+   						printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    					}
+  						// Free result set
+ 			 			mysqli_free_result($result);
+						}
+	  						// Print the response onto the page so that our gateway can read it
+	  						header('Content-type: text/plain');
+		  						echo $response;	
+
+						break;
+
+			case "2":
+	       		if($level==1){
+	        	//9d. Call the user and bridge to a sales person
+	          	$response = "END You will receive the rates for Mangoes shortly.\n";
+
+	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM vegetables_week1 where CommodityName = Mangoes";
+
+				if ($result=mysqli_query($con,$sql))
+ 			 	{
+ 			 	while ($obj=mysqli_fetch_object($result))
+  			 	 {
+   			 	printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    			}
+  				// Free result set
+ 				 mysqli_free_result($result);
+				}
+	  			// Print the response onto the page so that our gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	
+
+	        }
+	        break;
+
+	        case "3":
+	       		if($level==1){
+	        	//9d. Call the user and bridge to a sales person
+	          	$response = "END You will receive the rates for Oranges shortly.\n";
+
+	          	$sql="SELECT CommodityName,Quantity, Mon_price FROM vegetables_week1 where CommodityName = Oranges";
+
+				if ($result=mysqli_query($con,$sql))
+ 			 	{
+ 			 	while ($obj=mysqli_fetch_object($result))
+  			 	 {
+   			 	printf("%s (%s) (%s)\n", $obj->CommodityName,$obj->Quantity, $obj->Mon_price);
+    			}
+  				// Free result set
+ 				 mysqli_free_result($result);
+				}
+	  			// Print the response onto the page so that our gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	
+
+	        }
+	        break;
+	       
+	  	case '5':
+	  		if($level==1){
+	        	//9d. Call the user and bridge to a sales person
+	          	$response = "END Ensure to visit again to check the rates.\n";
+	  			// Print the response onto the page so that our gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	 
+	        }
+	  		break;
+					
+		default:
+			$response = "CON Invalid choice. Press 0 to go back and try again\n";
+	  			// Print the response onto the page so that the gateway can read it
+	  			header('Content-type: text/plain');
+		  			echo $response;	
+		}
+	        break;
+	   
+	    case "3":
 	        if($level==1){
 	        	//9d. Call the user and bridge to a sales person
 	          	$response = "END Ensure to visit again to check the rates.\n";
