@@ -1,6 +1,6 @@
 <?php 
 //theUssdDb.php
-//Connection Credentials
+
 $servername = 'localhost';
 $username = 'root';
 $password = "";
@@ -18,4 +18,4 @@ $dbport = 3306;
         //log error to file/db $e-getMessage()
         die("END An error was encountered. Please try again later");
     } 
-    //echo "Connected successfully (".$db->host_info.")";
+    
