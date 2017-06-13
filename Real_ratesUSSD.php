@@ -318,9 +318,12 @@ if(!empty($_POST) && !empty($_POST['phoneNumber'])){
 				    	break; 	}
 					}
 				}
-				 else{
+			}
+				 else {
 				//10. Check that user response is not empty
-					if($userResponse==""){				
+				 	$userResponse = null;
+					if ($userResponse == " ") 
+					{				
 						switch ($level) {			    		
 					   	 case 1:
 					   	 case 3:
