@@ -1,0 +1,9 @@
+let's do all the cool stuff here
+one needs to only master a couple git commands
+git clone
+git add
+git commit
+git remote add origin [address]
+git push
+
+just study these and you will be cool and ready and settled
